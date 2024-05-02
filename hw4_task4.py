@@ -17,19 +17,21 @@ def change_phone(args, contacts):
         return "Contact not found."
 
 def show_phone(args, contacts):
-    name = args[0]
-    if name in contacts:
-        return f"Phone number for {name}: {contacts[name]}"
+    if args:
+        name = args[0]
+        if name in contacts:
+            return f"Phone number for {name}: {contacts[name]}"
+        else:
+            return "Contact not found."
     else:
-        return "Contact not found."
+        return "Please provide a contact name."
 
 def show_all_contacts(contacts):
     if contacts:
-        print("All contacts:")
-        for name, phone in contacts.items():
-            print(f"{name}: {phone}")
+        all_contacts = "\n".join([f"{name}: {phone}" for name, phone in contacts.items()])
+        return "All contacts:\n" + all_contacts
     else:
-        print("No contacts available.")
+        return "No contacts available."
 
 def main():
     contacts = {}
@@ -50,7 +52,7 @@ def main():
         elif command == "phone":
             print(show_phone(args, contacts))
         elif command == "all":
-            show_all_contacts(contacts)
+            print(show_all_contacts(contacts))
         else:
             print("Invalid command.")
 
